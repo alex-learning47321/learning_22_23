@@ -4,25 +4,25 @@ data class Board(val squares: MutableList<String>) {
     fun isGameOver(): Boolean {
         // Check all rows
         for (i in 0..2) {
-            if (squares[i * 3] != "" && squares[i * 3] == squares[i * 3 + 1] && squares[i * 3 + 1] == squares[i * 3 + 2]) {
+            if (squares[i * 3] != "_" && squares[i * 3] == squares[i * 3 + 1] && squares[i * 3 + 1] == squares[i * 3 + 2]) {
                 return true
             }
         }
 
         // Check all columns
         for (i in 0..2) {
-            if (squares[i] != "" && squares[i] == squares[i + 3] && squares[i + 3] == squares[i + 6]) {
+            if (squares[i] != "_" && squares[i] == squares[i + 3] && squares[i + 3] == squares[i + 6]) {
                 return true
             }
         }
 
         // Check diagonal from top left to bottom right
-        if (squares[0] != "" && squares[0] == squares[4] && squares[4] == squares[8]) {
+        if (squares[0] != "_" && squares[0] == squares[4] && squares[4] == squares[8]) {
             return true
         }
 
         // Check diagonal from top right to bottom left
-        if (squares[2] != "" && squares[2] == squares[4] && squares[4] == squares[6]) {
+        if (squares[2] != "_" && squares[2] == squares[4] && squares[4] == squares[6]) {
             return true
         }
 
@@ -52,7 +52,7 @@ private fun promptMove(): Int {
 
 fun main() {
     // Initialize the board with empty strings
-    val board = Board(MutableList(9) { "" })
+    val board = Board(MutableList(9) { "_" })
     var move=-1;
     while(!board.isGameOver()) {
         // Print the current state of the board
