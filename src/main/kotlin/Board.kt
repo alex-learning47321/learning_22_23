@@ -1,5 +1,5 @@
 // Define a data class to represent a tic-tac-toe board
-data class Board(val squares: List<String>) {
+data class Board(val squares: MutableList<String>) {
     // Function to check if the game is over
     fun isGameOver(): Boolean {
         // Check all rows
@@ -32,16 +32,34 @@ data class Board(val squares: List<String>) {
 }
 
 
+// Function to print the current state of the board
+fun printBoard(board: Board) {
+    for (i in 0..2) {
+        for (j in 0..2) {
+            val index = i * 3 + j
+            val square = board.squares[index]
+            print("$square ")
+        }
+        println()
+    }
+}
+
+
+private fun promptMove(): Int {
+    print("Enter move: ")
+    return readLine()!!.toInt()
+}
+
 fun main() {
     // Initialize the board with empty strings
-    val board = Board(List(9) { "" })
-
+    val board = Board(MutableList(9) { "" })
+    var move=-1;
     while(!board.isGameOver()) {
         // Print the current state of the board
         printBoard(board)
 
         // Prompt the current player to make a move
-        val move = promptMove()
+        move = promptMove()
 
         // Make the move and update the board
         board.squares[move] = "X"
@@ -76,24 +94,5 @@ fun main() {
         "Nobody"
     }
     println("$winner wins!")
-}
-
-
-// Function to print the current state of the board
-fun printBoard(board: Board) {
-    for (i in 0..2) {
-        for (j in 0..2) {
-            val index = i * 3 + j
-            val square = board.squares[index]
-            print("$square ")
-        }
-        println()
-    }
-}
-
-
-fun promptMove(): Int {
-    print("Enter move: ")
-    return readLine()!!.toInt()
 }
 
